@@ -28,7 +28,6 @@ ACC_PW  = "D9C774CBE52BDEC71C5D253F5E0D8D787232F6D65462DB2BCE20E2F1D22899AE"
 SERVER_URL = "https://client.ind.freefiremobile.com"
 RELEASE = "OB55"
 
-# Region name -> number code (bot isi number format me expect karta hai)
 REGION_NAME_TO_CODE = {
     "IND": "1", "SG": "2", "BR": "3", "RU": "4", "ID": "5",
     "TW": "6", "US": "7", "VN": "8", "TH": "9", "ME": "10", "BD": "13",
@@ -100,16 +99,19 @@ def info():
 
         basic = raw.get("basic_info", {}) or {}
         nickname = basic.get("nickname", "Unknown")
+        
+        # 🚀 YAHAN FIX HAI: Unicode kachre ko theek karne ke liye
+        if nickname and "\\u" in str(nickname):
+            try:
+                nickname = nickname.encode('latin-1').decode('utf-8')
+            except:
+                pass
+
         level = basic.get("level", 0)
         likes = basic.get("liked", 0)
         region_name = basic.get("region", "IND")
         region_code = REGION_NAME_TO_CODE.get(region_name, "1")
 
-        # ═══════════════════════════════════════════════════════════
-        # 🔴 BOT-COMPATIBLE FORMAT
-        # Bot "AccountInfo" / "accountInfo" / "basic_info" teeno handle karta hai
-        # Purane bot ko AccountInfo chahiye with specific field names
-        # ═══════════════════════════════════════════════════════════
         account_info = {
             "AccountName": nickname,
             "AccountLevel": level,
@@ -122,8 +124,6 @@ def info():
             "status": 1,
             "credit": "@Master_ff_01",
             "channel": "@Masterofficialchannel",
-
-            # Bot ye keys me se koi bhi check karta hai
             "AccountInfo": account_info,
             "accountInfo": account_info,
             "basic_info": {
@@ -133,8 +133,6 @@ def info():
                 "region": region_name,
                 "account_id": uid,
             },
-
-            # Full raw data bhi rakh do
             "data": raw,
         })
     except Exception as e:
