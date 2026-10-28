@@ -45,7 +45,7 @@ def get_token():
     if _tk["tk"] and _tk["exp"] > now:
         return _tk["tk"]
     try:
-        r = httpx.get(f"{JWT_API_BASE}?uid={ACC_UID}&password={ACC_PW}&api_key=JWT_API_KEY", timeout=15)
+        r = httpx.get(f"{JWT_API_BASE}?uid={ACC_UID}&password={ACC_PW}&api_key=", timeout=15)
         print(f"[JWT] {r.status_code}")
         d = r.json()
         tk = d.get("token")
