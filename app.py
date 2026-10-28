@@ -17,7 +17,7 @@ USERAGENT = "Dalvik/2.1.0 (Linux; U; Android 14; CPH2095 Build/RKQ1.211119.001)"
 MAIN_KEY = b'Yg&tc%DEuh6%Zc^8'
 MAIN_IV = b'6oyZDr22E3ychjM%'
 
-JWT_API_BASE = "https://access-jwt.vercel.app/token"
+JWT_API_BASE = "https://jwt-apis-ob55.onrender.com/token"
 
 # ═══════════════════════════════════════════
 #  APNA ACCOUNT YAHAN DAAL
