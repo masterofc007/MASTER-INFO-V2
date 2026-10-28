@@ -17,7 +17,7 @@ USERAGENT = "Dalvik/2.1.0 (Linux; U; Android 14; CPH2095 Build/RKQ1.211119.001)"
 MAIN_KEY = b'Yg&tc%DEuh6%Zc^8'
 MAIN_IV = b'6oyZDr22E3ychjM%'
 
-JWT_API_BASE = "https://jwt-abhi.vercel.app/token"
+JWT_API_BASE = "https://access-jwt.vercel.app/token"
 
 # ═══════════════════════════════════════════
 #  APNA ACCOUNT YAHAN DAAL
@@ -45,7 +45,7 @@ def get_token():
     if _tk["tk"] and _tk["exp"] > now:
         return _tk["tk"]
     try:
-        r = httpx.get(f"{JWT_API_BASE}?uid={ACC_UID}&password={ACC_PW}&api_key=ABHI", timeout=15)
+        r = httpx.get(f"{JWT_API_BASE}?uid={ACC_UID}&password={ACC_PW}&api_key=JWT_API_KEY", timeout=15)
         print(f"[JWT] {r.status_code}")
         d = r.json()
         tk = d.get("token")
